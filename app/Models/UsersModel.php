@@ -58,6 +58,7 @@ class UsersModel extends Model
     {
         $db = \Config\Database::connect();
         $query = "SELECT * FROM users WHERE id = '$id';";
+        // return $db->query($query)->getResultArray();
         return $db->query($query)->getResultArray();
     }
 

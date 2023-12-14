@@ -57,7 +57,7 @@
                         <p class="card-text">Data de Criação: <?php echo $usuario['user_date_created_account']; ?></p>
                     </div>
                     <div class="ml-auto">
-                        <a href="#" class="btn btn-primary mr-2">Editar dados</a>
+                        <a href="<?=base_url('user/' . $usuario['id'])?>" class="btn btn-primary mr-2">Editar dados</a>
                         <a href="<?=base_url('delete/' . $usuario['id'])?>" class="btn btn-danger">Excluir dados</a>
                     </div>
                 </div>

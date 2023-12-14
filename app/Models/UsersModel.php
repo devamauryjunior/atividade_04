@@ -30,13 +30,13 @@ class UsersModel extends Model
         }
     }
 
-    public function updateAllDatesUser($dados)
+    public function updateAllDatesUser($dados, $senha)
     {
         $db = \Config\Database::connect();
         $name = $dados['nome'];
         $email = $dados['email'];
-        $senha = $dados['senha'];
-        $query = "UPDATE users set nome = '$name', email = '$email', senha = '$senha';";
+        $id = $dados['id'];
+        $query = "UPDATE users set nome = '$name', email = '$email', senha = '$senha' WHERE id = '$id';";
         return $db->query($query);
     }
 
@@ -52,6 +52,13 @@ class UsersModel extends Model
         $db = \Config\Database::connect();
         $query = "DELETE FROM users WHERE id = '$id';";
         return $db->query($query);
+    }
+
+    public function getOneUser($id)
+    {
+        $db = \Config\Database::connect();
+        $query = "SELECT * FROM users WHERE id = '$id';";
+        return $db->query($query)->getResultArray();
     }
 
     public function getAllUsers()

@@ -41,4 +41,28 @@ class Home extends BaseController
         $session->setFlashdata(['status' => "notdelete"]);
         return view('index', ['usuarios' => $getAllUser]);
     }
+
+    public function screenUpdateUser($id)
+    {
+        $usersModel =  new \App\Models\UsersModel();
+        $getDateUser = $usersModel->getOneUser($id);
+        // var_dump($getDateUser);
+        return view('editar', ["usuario" => $getDateUser]);
+    }
+
+    public function updateUser()
+    {
+        $usersModel =  new \App\Models\UsersModel();
+        $senha = hash('md5', $_POST['senha']);
+        $res = $usersModel->updateAllDatesUser($_POST, $senha);
+        // var_dump($res);
+        $session = session();
+        if($res) {
+            $getAllUser = $usersModel->getAllUsers();
+            return view('index', ["usuarios" => $getAllUser]);
+        }
+        $getDateUser = $usersModel->getOneUser($_POST['id']);
+        $session->setFlashdata(['status' => "error"]);
+        return view('editar', ["usuario" => $getDateUser]);
+    }
 }
